@@ -1,0 +1,28 @@
+.slider.slider-horizontal {
+  width: 82em;
+  height: 20px;
+}
+
+.image_overlay {
+    position: absolute;
+    left: 25%;
+    top: 0px;
+}
+
+.image_container {
+  position: relative;
+  float: left;
+  padding: 0;
+}
+
+.image_top {
+  z-index: 3;
+}
+
+.image_mid {
+  z-index: 2;
+}
+
+.image_bottom {
+  z-index: 1;
+}

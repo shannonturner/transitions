@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="http://shannonvturner.com/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Slider -->
+    <link href="http://shannonvturner.com/bootstrap-slider/css/bootstrap-slider.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="http://shannonvturner.com/css/transitions.css" rel="stylesheet">
+
+    <title>Transitions: Before and After</title>
+
+  </head>
+
+<body>
+
+<div class="container">
+
+<!-- EDITABLE -->
+  
+  <div class="text-center">
+  <h2>Transitions</h2>
+  <h3>In focus: <a href="http://shannonvturner.com/bechdel" target="_blank">Watch This Instead</a></h3> 
+  <h5>Use the slider to see how the site looked originally; the redesign wireframe; and the redesign</h5>
+  </div>
+
+  
+
+  <div class="text-center image_container" style="width: 74em; height: 38em;">
+
+    <!-- Images go here -->
+
+    <img src="http://shannonvturner.com/images/bechdel_old.png" height="511" width="609" class="image_overlay image_top" id="img_top">
+    <img src="http://shannonvturner.com/images/bechdel_wireframe.png" height="511" width="609" class="image_overlay image_mid" id="img_mid">
+    <img src="http://shannonvturner.com/images/bechdel_new.png" height="511" width="609" class="image_overlay image_bottom" id="img_bottom">
+
+    <!-- END: Images go here -->
+
+  </div>
+
+  <br>
+
+  <div class="slider slider-horizontal" style="width: 82em !important;">
+
+    <div class="slider-track">
+      <div class="slider-selection" style="left: 0%; width: 0%;"> </div>
+      <div class="slider-handle round" style="left: 32%;" tabindex="0"> </div>
+      <div class="slider-handle round hide" tabindex="0" style="left: 0%;"> </div>
+    </div>
+
+    <div id="tooltip" class="tooltip top" style="top: -30px; left: 55.7px;">
+      <div class="tooltip-arrow"> </div>
+      <div class="tooltip-inner"> </div>
+    </div>
+
+    <div id="tooltip_min" class="tooltip top" style="top: -30px;">
+      <div class="tooltip-arrow"> </div>
+      <div class="tooltip-inner"> </div>
+    </div>
+
+    <div id="tooltip_max" class="tooltip bottom" style="top: 18px;">
+      <div class="tooltip-arrow"> </div>
+      <div class="tooltip-inner"> </div>
+    </div>
+
+    <input id="before_after" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" style="display: none;">
+  </div>
+
+<!-- END: EDITABLE -->
+
+</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://shannonvturner.com/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://shannonvturner.com/bootstrap-slider/js/bootstrap-slider.js"></script>
+
+    <script>
+
+      $("#before_after").slider({
+        'min': 0,
+        'max': 100,
+        'step': 1,
+        'tooltip': 'show'
+      });
+      $("#before_after").on('slide', function(slideEvt) {
+        //$("#before_afterSliderVal").text(slideEvt.value);
+
+        opacity_formula = [
+          (100 - (2 * slideEvt.value)) / 100.0,
+          0,  
+          (-100 + (2 * slideEvt.value)) / 100.0
+        ];
+
+        if (slideEvt.value <= 50) {
+          opacity_formula[1] = (2 * slideEvt.value) / 100.0;
+        }
+        else if (slideEvt.value > 50) {
+          opacity_formula[1] = ((-2 * slideEvt.value) + 200) / 100.0;
+        }
+
+        $("#img_top").css("opacity", opacity_formula[0]);
+        $("#img_mid").css("opacity", opacity_formula[1]);
+        $("#img_bottom").css("opacity", opacity_formula[2]);
+
+      });
+
+    </script>
+
+  </body>
+</html>
